@@ -1,0 +1,208 @@
+.youtube-player-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 10px auto;
+  padding: 0;
+  position: relative;
+  max-width: 450px; /* Limitamos el ancho máximo */
+}
+
+youtube-player {
+  display: block; /* Cambiado por el wrapper */
+  position: relative;
+  width: 100% !important;
+  height: 100% !important; /* Modificado para ajustar el tamaño a su nuevo contenedor youtube-wrapper */ 
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5rem;
+  background-color: black; /* Fondo negro para los bordes */
+  z-index: 2; /* Añadido por el wrapper */
+}
+
+/* Asegurar que el iframe se ajuste al contenedor */
+::ng-deep youtube-player iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+}
+
+.custom-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: rgba(248, 249, 250, 0.95);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.video-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.main-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.control-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.control-button:hover {
+  background-color: #c82333;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.volume-slider {
+  width: 100px;
+  margin: 0 0.5rem;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: #e9ecef;
+  border-radius: 2px;
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb,
+.progress-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #3538dc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.volume-slider::-moz-range-thumb,
+.progress-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #3538dc;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.progress-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 0.5rem;
+}
+
+.progress-slider {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #e9ecef;
+  border-radius: 2px;
+  outline: none;
+}
+
+.volume-slider {
+  width: 100px;
+  margin: 0 1rem;
+}
+
+.progress-container {
+  width: 100%;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-slider {
+  flex: 1;
+  height: 4px;
+  appearance: none;
+  background: #e9ecef;
+  border-radius: 2px;
+  outline: none;
+}
+
+.progress-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #dc3545;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.progress-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #dc3545;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.time-display {
+  font-size: 0.8rem;
+  color: #6c757d;
+  min-width: 45px;
+  text-align: center;
+}
+
+/* Añadido para el bloqueador del overlay de Youtube */
+
+.youtube-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 250px; /* altura del vídeo */
+}
+
+/* 🔒 Overlay transparente para bloquear clics sobre el iframe */
+.overlay-blocker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: transparent;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+/* 👁️ Ocultamos el overlay cuando el vídeo está en reproducción */
+.overlay-blocker.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
