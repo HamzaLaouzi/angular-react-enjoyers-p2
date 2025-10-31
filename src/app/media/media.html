@@ -1,0 +1,71 @@
+<div class="youtube-player-container">
+  <!-- Apertura del div del bloqueador de Youtube -->
+  <div class="youtube-wrapper">
+    <youtube-player
+      #youtubePlayer
+      [videoId]="youtubeId"
+      [height]="250"
+      [width]="450"
+      [playerVars]="playerVars"
+      suggestedQuality="highres"
+     class="youtube-player">
+    </youtube-player>
+
+
+  <!-- Bloqueador para el overlay de Youtube --> 
+  <div 
+      class="overlay-blocker" 
+      [class.hidden]="isPlaying" 
+      (click)="playVideo()">
+    </div>
+  </div>
+
+
+  <!-- Controles personalizados -->
+  <div class="custom-controls">
+    <div class="video-controls">
+      <!-- Botones de control principales -->
+      <div class="main-controls">
+        <button class="control-button" (click)="playVideo()">
+          <i class="fas fa-play"></i> Play
+        </button>
+        <button class="control-button" (click)="pauseVideo()">
+          <i class="fas fa-pause"></i> Pause
+        </button>
+        <button class="control-button" (click)="stopVideo()">
+          <i class="fas fa-stop"></i> Stop
+        </button>
+      </div>
+
+      <!-- Control de volumen -->
+      <div class="volume-control">
+        <i class="fas fa-volume-down"></i>
+        <input 
+          type="range" 
+          min="0" 
+          max="100" 
+          [value]="currentVolume"
+          (input)="onVolumeChange($event)"
+          class="volume-slider"
+          aria-label="Control de volumen"
+        />
+        <i class="fas fa-volume-up"></i>
+      </div>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="progress-container">
+      <span class="time-display">{{ formatTime(currentTime) }}</span>
+      <input 
+        type="range" 
+        class="progress-slider"
+        [min]="0"
+        [max]="duration"
+        [value]="currentTime"
+        (input)="onProgressChange($event)"
+        aria-label="Barra de progreso"
+      />
+      <span class="time-display">{{ formatTime(duration) }}</span>
+    </div>
+  </div>
+</div>

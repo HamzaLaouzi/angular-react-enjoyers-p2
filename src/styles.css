@@ -1,0 +1,70 @@
+/* --------------------------
+   Variables de la paleta
+---------------------------*/
+:root {
+  --color-primario: #E44D26;       /* Naranja/rojo Angular */
+  --color-secundario: #0A7EA4;     /* Azul React */
+  --color-fondo-oscuro: #0F2537;   /* Fondo oscuro general */
+  --color-texto: #FFFFFF;          /* Blanco para contraste */
+  --color-hover: #F4B042;          /* Naranja claro / highlights */
+}
+
+/* --------------------------
+   Estilo general del body
+---------------------------*/
+body {
+  background-color: var(--color-fondo-oscuro);
+  color: var(--color-texto);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),  /* Añade un oscurecedor para hacer más visible el contenido de la app */
+    url('/assets/fondo_cancha_oscura.jpg') center center / cover no-repeat fixed;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+/* --------------------------
+   Header
+---------------------------*/
+header {
+  background-color: var(--color-primario);
+  color: var(--color-texto);
+}
+
+/* --------------------------
+   Contenedor principal
+---------------------------*/
+main.container {
+  padding-top: 20px;
+}
+
+/* --------------------------
+   Estilos de lista de jugadores
+   (por si quieres aplicar después)
+---------------------------*/
+.list-group-item {
+  transition: background-color 0.15s ease, color 0.15s ease;
+  background-color: #0F2537; /* fondo oscuro */
+  color: var(--color-texto);
+  cursor: pointer;
+}
+
+.list-group-item:hover {
+  background-color: var(--color-hover);
+  color: var(--color-fondo-oscuro);
+}
+
+.list-group-item.active {
+  background-color: var(--color-secundario);
+  color: var(--color-texto);
+}
+
+.badge {
+  background-color: var(--color-primario);
+  color: var(--color-texto);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
