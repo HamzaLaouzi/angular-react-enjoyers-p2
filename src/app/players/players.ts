@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Player } from '../models/player.model';
-import { PLAYERS } from '../data/players';
+// import { PLAYERS } from '../data/players';  /* Comentado para desactivar el enlace a nuestro array local*/
+import { PlayerService } from '../players/players.services'; /*Nuevo importar de FireBase*/
 import { DetailComponent } from '../detail/detail';
 
 import { CommonModule } from '@angular/common';
@@ -15,14 +16,19 @@ import { PlayerFilterPipe } from '../player-filter-pipe';
   imports: [CommonModule, FormsModule, PlayerFilterPipe]
 })
 export class PlayersComponent {
-  players: Player[] = PLAYERS;
+  players: Player[] = [];
   selectedPlayerId: number | null = null;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private playerService: PlayerService) {}
+
+  ngOnInit() {
+    this.playerService.getPlayers().subscribe(data => {
+      this.players = data;
+    });
+  }
 
   openDialog(player: Player) {
     this.selectedPlayerId = player.id;
-
     const dialogRef = this.dialog.open(DetailComponent, {
       width: '700px',
       data: player
@@ -36,8 +42,40 @@ export class PlayersComponent {
   // Variables para filtros
   filterName: string = '';
   filterHeight: number | null = null;
-  filterPosition: string = ''; 
-
-  // Mostrar u ocultar lista
+  filterPosition: string = '';
   showList = true;
 }
+
+
+
+
+// Antiguo contenido con nuestro array local, comentado para desactivar
+
+
+// export class PlayersComponent {
+//   players: Player[] = PLAYERS;
+//   selectedPlayerId: number | null = null;
+
+//   constructor(private dialog: MatDialog) { }
+
+//   openDialog(player: Player) {
+//     this.selectedPlayerId = player.id;
+
+//     const dialogRef = this.dialog.open(DetailComponent, {
+//       width: '700px',
+//       data: player
+//     });
+
+//     dialogRef.afterClosed().subscribe(() => {
+//       this.selectedPlayerId = null;
+//     });
+//   }
+
+//   // Variables para filtros
+//   filterName: string = '';
+//   filterHeight: number | null = null;
+//   filterPosition: string = ''; 
+
+//   // Mostrar u ocultar lista
+//   showList = true;
+// }
