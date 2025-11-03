@@ -6,21 +6,22 @@ import { Player } from '../app/models/player.model';
   standalone: true
 })
 export class PlayerFilterPipe implements PipeTransform {
-  transform(
-    players: Player[] | null | undefined, 
-    name: string = '', 
+  transform<T extends Player>(
+    players: (T & { id?: string })[] | null | undefined,
+    name: string = '',
     minHeight: number | null = null,
     position: string = ''
-  ): Player[] {
+  ): (T & { id?: string })[] {
     if (!players) return [];
 
     return players.filter(player => {
-      const matchesName = name 
-        ? player.nombre.toLowerCase().includes(name.toLowerCase()) || player.apellidos.toLowerCase().includes(name.toLowerCase())
+      const matchesName = name
+        ? player.nombre.toLowerCase().includes(name.toLowerCase()) ||
+        player.apellidos.toLowerCase().includes(name.toLowerCase())
         : true;
 
-      const matchesHeight = minHeight 
-        ? player.altura >= minHeight 
+      const matchesHeight = minHeight
+        ? player.altura >= minHeight
         : true;
 
       const matchesPosition = position

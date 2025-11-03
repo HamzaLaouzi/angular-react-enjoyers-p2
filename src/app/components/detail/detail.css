@@ -1,20 +1,36 @@
 /* Contenedor que se desplaza solo si el contenido es demasiado grande */
 .card-content-scrollable {
-    max-height: 80vh; /* solo limita el contenido, no toda la card */
-    overflow-y: auto; 
-  }
-  
-  /*estilos del scroll */
-  .card-content-scrollable::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .card-content-scrollable::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-  }
-  
-  .card-content-scrollable::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  
+  max-height: 80vh;
+  /* solo limita el contenido, no toda la card */
+  overflow-y: auto;
+}
+
+/*estilos del scroll */
+.card-content-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.card-content-scrollable::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.card-content-scrollable::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.btn-editar {
+  background-color: var(--color-fondo-oscuro);
+  color: var(--color-texto);
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-editar:hover {
+  background-color: var(--color-secundario);
+  color: var(--color-texto);
+  cursor: pointer;
+}

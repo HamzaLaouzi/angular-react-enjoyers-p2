@@ -21,4 +21,8 @@ export class DetailComponent {
   close(): void {
     this.dialogRef.close();
   }
+
+  editPlayer(player: Player){
+    console.log("Editando: ", player)
+  }
 }

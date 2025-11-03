@@ -2,16 +2,8 @@
   <div class="container">
     <!-- Filtros de búsqueda -->
     <div *ngIf="showList" class="filter-container">
-      <input
-        type="text"
-        placeholder="Buscar por nombre"
-        [(ngModel)]="filterName"
-      />
-      <input
-        type="number"
-        placeholder="Altura mínima"
-        [(ngModel)]="filterHeight"
-      />
+      <input type="text" placeholder="Buscar por nombre" [(ngModel)]="filterName" />
+      <input type="number" placeholder="Altura mínima" [(ngModel)]="filterHeight" />
       <select [(ngModel)]="filterPosition" class="form-control">
         <option value="">Todas las posiciones</option>
         <option value="Base">Base</option>
@@ -20,6 +12,11 @@
         <option value="Ala-Pívot">Ala-Pivot</option>
         <option value="Pívot">Pivot</option>
       </select>
+
+      <!-- Botón Añadir jugador -->
+      <button class="btn btn-primario" style="margin-left: auto;" (click)="addPlayer()">
+        Añadir jugador
+      </button>
     </div>
   </div>
 
@@ -31,33 +28,29 @@
   <!-- Contenido -->
   <div class="card-body">
     <div class="row g-3">
-      
+
       <!-- ✅ Aquí se aplica el pipe -->
       @for (player of players | playerFilter: filterName : filterHeight : filterPosition; track player.id) {
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <div
-            class="card h-100 text-center shadow-sm player-card position-relative"
-            (click)="openDialog(player)"
-            [class.border-primario]="player.id === selectedPlayerId"
-            style="cursor: pointer;"
-          >
-            <!-- Imagen del jugador -->
-            <div class="ratio ratio-1x1 overflow-hidden">
-              <img
-                [src]="player.multimedia[0]"
-                class="card-img-top img-fluid player-img"
-                alt="{{ player.nombre }}"
-              />
-            </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card h-100 text-center shadow-sm player-card position-relative" (click)="openDialog(player)"
+          [class.border-primario]="player.id === selectedPlayerId" style="cursor: pointer;">
 
-            <!-- Nombre del jugador -->
-            <div class="card-body p-2">
-              <h6 class="card-title mb-0">
-                {{ player.nombre }} {{ player.apellidos }}
-              </h6>
-            </div>
+          <!-- Imagen del jugador -->
+          <div class="ratio ratio-1x1 overflow-hidden">
+            <img [src]="player.multimedia[0]" class="card-img-top img-fluid player-img" alt="{{ player.nombre }}" />
+          </div>
+
+          <!-- Nombre del jugador + Botón eliminar -->
+          <div class="card-body p-2 d-flex justify-content-between align-items-center">
+            <h6 class="card-title mb-0">
+              {{ player.nombre }} {{ player.apellidos }}
+            </h6>
+            <button class="btn btn-eliminar btn-sm" (click)="deletePlayer(player, $event)">
+              Eliminar
+            </button>
           </div>
         </div>
+      </div>
       }
     </div>
   </div>

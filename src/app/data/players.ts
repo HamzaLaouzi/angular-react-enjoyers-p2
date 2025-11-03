@@ -2,7 +2,6 @@ import { Player } from '../models/player.model';
 
 export const PLAYERS: Player[] = [
   {
-    id: 1,
     nombre: 'Nikola',
     apellidos: 'Jokic',
     posicion: 'Pívot',
@@ -18,7 +17,6 @@ export const PLAYERS: Player[] = [
     `
   },
   {
-    id: 2,
     nombre: 'Giannis',
     apellidos: 'Antetokounmpo',
     posicion: 'Ala-Pívot',
@@ -33,7 +31,6 @@ export const PLAYERS: Player[] = [
     `
   },
   {
-    id: 3,
     nombre: 'Luka',
     apellidos: 'Doncic',
     posicion: 'Base',
@@ -48,7 +45,6 @@ export const PLAYERS: Player[] = [
     `
   },
   {
-    id: 4,
     nombre: 'Stephen',
     apellidos: 'Curry',
     posicion: 'Base',
@@ -65,7 +61,6 @@ export const PLAYERS: Player[] = [
     `
   },
   {
-    id: 5,
     nombre: 'Kevin',
     apellidos: 'Durant',
     posicion: 'Alero',
@@ -81,7 +76,6 @@ export const PLAYERS: Player[] = [
     `
   },
   {
-    id: 6,
     nombre: 'LeBron',
     apellidos: 'James',
     posicion: 'Alero',
@@ -96,7 +90,6 @@ export const PLAYERS: Player[] = [
     `
   },
   {
-    id: 7,
     nombre: 'Jayson',
     apellidos: 'Tatum',
     posicion: 'Alero',
@@ -111,7 +104,6 @@ export const PLAYERS: Player[] = [
     `
   },
   {
-    id: 8,
     nombre: 'Shai',
     apellidos: 'Gilgeous-Alexander',
     posicion: 'Base',

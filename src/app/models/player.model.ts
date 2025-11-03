@@ -1,5 +1,4 @@
 export interface Player {
-  id: number;
   nombre: string;
   apellidos: string;
   posicion: string;
@@ -9,3 +8,6 @@ export interface Player {
   youtubeId?: string;
   info: string;
 }
+
+// Tipo extendido con ID autogenerado de Firestore
+export type PlayerWithId = Player & { id: string };
