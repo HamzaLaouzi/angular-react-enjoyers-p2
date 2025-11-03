@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Player } from '../models/player.model';
-import { PLAYERS } from '../data/players';
+import { Player } from '../../models/player.model';
+import { PLAYERS } from '../../data/players';
 import { DetailComponent } from '../detail/detail';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PlayerFilterPipe } from '../player-filter-pipe';
+import { PlayerFilterPipe } from '../../player-filter-pipe';
 
 @Component({
   selector: 'app-players',

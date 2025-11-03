@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Player } from '../models/player.model';
+import { Player } from '../../models/player.model';
 import { MatIconModule } from '@angular/material/icon';
 import { MediaComponent } from '../media/media';
 import { NgIf } from '@angular/common';
