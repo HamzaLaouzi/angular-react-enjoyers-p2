@@ -6,7 +6,6 @@ import { Player } from '../models/player.model';
 import { MatIconModule } from '@angular/material/icon';
 import { MediaComponent } from '../media/media';
 import { NgIf, CommonModule } from '@angular/common'; 
-// 🔑 Importaciones cruciales de Forms y el Servicio
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PlayerService } from '../services/player.service'; 
 
@@ -15,7 +14,6 @@ import { PlayerService } from '../services/player.service';
   templateUrl: './detail.html',
   styleUrls: ['./detail.css'],
   standalone: true,
-  // ReactiveFormsModule es necesario para [formGroup] y formControlName
   imports: [MatIconModule, MediaComponent, NgIf, ReactiveFormsModule, CommonModule]
 })
 export class DetailComponent implements OnInit {
@@ -28,8 +26,8 @@ export class DetailComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Player,
-    private fb: FormBuilder, // Inyectamos FormBuilder
-    private playerService: PlayerService // Inyectamos el servicio de Firebase
+    private fb: FormBuilder,
+    private playerService: PlayerService
   ) {
     this.player = data;
   }
@@ -44,7 +42,6 @@ export class DetailComponent implements OnInit {
       nombre: [this.player.nombre, Validators.required],
       apellidos: [this.player.apellidos, Validators.required],
       posicion: [this.player.posicion, Validators.required],
-      // Validación de edad: requerido y mínimo 1 año (para evitar error de min)
       edad: [this.player.edad, [Validators.required, Validators.min(1)]],
       altura: [this.player.altura, Validators.required],
       multimedia: [this.player.multimedia],
@@ -72,8 +69,8 @@ export class DetailComponent implements OnInit {
     if (this.editForm.valid && this.player.id) {
         const updatedData = this.editForm.value as Partial<Player>;
         
-        // 🚨 CORRECCIÓN: Usamos `this.player.id!` para afirmar que es un string (ID de Firebase)
-        this.playerService.updatePlayer(this.player.id!, updatedData) 
+        // ✅ CORRECCIÓN: Doble aserción para forzar el tipo string
+        this.playerService.updatePlayer(this.player.id as unknown as string, updatedData) 
             .then(() => {
                 this.player = { ...this.player, ...updatedData } as Player;
                 this.isEditing = false;
@@ -96,8 +93,8 @@ export class DetailComponent implements OnInit {
     
     if (confirm(`¿Estás seguro de que quieres eliminar a ${this.player.nombre} ${this.player.apellidos}? Esta acción es permanente.`)) {
       
-      // 🚨 CORRECCIÓN: Usamos `this.player.id!` para afirmar que es un string (ID de Firebase)
-      this.playerService.deletePlayer(this.player.id!)
+      // ✅ CORRECCIÓN: Doble aserción para forzar el tipo string
+      this.playerService.deletePlayer(this.player.id as unknown as string)
         .then(() => {
           this.dialogRef.close({ deleted: true }); 
         })
