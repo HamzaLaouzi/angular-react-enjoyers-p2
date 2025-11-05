@@ -34,6 +34,10 @@ export class DetailComponent implements OnInit {
   
   ngOnInit(): void {
       this.initForm();
+      // Si estamos en modo creación (ID es 0 o undefined), iniciamos en edición.
+      if (!this.player.id || this.player.id === 0) {
+          this.startEdit();
+      }
   }
 
   // Inicializa el formulario con todos los campos y validaciones
@@ -44,7 +48,8 @@ export class DetailComponent implements OnInit {
       posicion: [this.player.posicion, Validators.required],
       edad: [this.player.edad, [Validators.required, Validators.min(1)]],
       altura: [this.player.altura, Validators.required],
-      multimedia: [this.player.multimedia],
+      // Unimos el array de multimedia en un string con saltos de línea para el textarea
+      multimedia: [this.player.multimedia?.join('\n') || ''], 
       youtubeId: [this.player.youtubeId],
       info: [this.player.info, Validators.required]
     });
@@ -54,36 +59,75 @@ export class DetailComponent implements OnInit {
 
   startEdit(): void {
     this.isEditing = true;
-    this.editForm.reset(this.player); 
+    this.editForm.reset({
+        ...this.player, 
+        // Aseguramos que el multimedia en el formulario sea el string unido
+        multimedia: this.player.multimedia?.join('\n') || '' 
+    }); 
   }
 
   cancelEdit(): void {
     this.isEditing = false;
-    this.editForm.reset(this.player); 
+    this.editForm.reset({
+        ...this.player, 
+        multimedia: this.player.multimedia?.join('\n') || ''
+    }); 
   }
 
-  // Guarda los cambios llamando al servicio de actualización
-  saveChanges(): void {
+  // Función auxiliar para manejar errores y mostrar el mensaje completo
+  private handleError(error: any): void {
+      console.error("Error de Firebase:", error);
+      // Muestra el error en una alerta para que puedas verlo
+      alert(`❌ Error: Falló la operación en la base de datos. Mensaje detallado: ${error.message || 'Desconocido'}`);
+      this.dialogRef.close();
+  }
+
+  // Guarda los cambios llamando al servicio de actualización/creación
+  async saveChanges(): Promise<void> {
     this.editForm.markAllAsTouched();
     
-    if (this.editForm.valid && this.player.id) {
-        const updatedData = this.editForm.value as Partial<Player>;
+    if (!this.editForm.valid) {
+         return alert('Por favor, rellena todos los campos obligatorios correctamente.');
+    }
+    
+    const formValues = this.editForm.value;
+    
+    // 🔑 PASO CLAVE: Reconstruir el objeto de datos que Firebase necesita
+    const dataToSave: Omit<Player, 'id'> = {
+        nombre: formValues.nombre,
+        apellidos: formValues.apellidos,
+        posicion: formValues.posicion,
+        edad: formValues.edad,
+        altura: formValues.altura,
+        info: formValues.info,
+        youtubeId: formValues.youtubeId,
+        // Convertimos el string de multimedia de vuelta a string[]
+        multimedia: formValues.multimedia.split('\n').filter((url: string) => url.trim() !== ''),
+    };
+    
+    // 🔑 LÓGICA DE CREACIÓN VS. EDICIÓN
+    if (this.player.id) {
+        // MODO EDICIÓN: El jugador tiene ID
+        // 🚨 Doble aserción para convertir el 'number' del modelo a 'string' (ID de Firestore)
+        const firestoreId = this.player.id as unknown as string;
         
-        // ✅ CORRECCIÓN: Doble aserción para forzar el tipo string
-        this.playerService.updatePlayer(this.player.id as unknown as string, updatedData) 
-            .then(() => {
-                this.player = { ...this.player, ...updatedData } as Player;
-                this.isEditing = false;
-                
-                this.dialogRef.close({ updated: true });
-            })
-            .catch((error: any) => {
-                console.error("Error al actualizar el jugador:", error);
-                alert("❌ Error: No se pudo actualizar el jugador.");
-                this.dialogRef.close();
-            });
+        try {
+            await this.playerService.updatePlayer(firestoreId, dataToSave);
+            this.player = { ...this.player, ...dataToSave } as Player;
+            this.isEditing = false;
+            this.dialogRef.close({ updated: true });
+        } catch (error) {
+            this.handleError(error);
+        }
+        
     } else {
-         alert('Por favor, rellena todos los campos obligatorios correctamente.');
+        // MODO CREACIÓN: El jugador NO tiene ID (es nuevo)
+        try {
+            await this.playerService.createPlayer(dataToSave);
+            this.dialogRef.close({ updated: true }); 
+        } catch (error) {
+            this.handleError(error);
+        }
     }
   }
 
@@ -93,16 +137,14 @@ export class DetailComponent implements OnInit {
     
     if (confirm(`¿Estás seguro de que quieres eliminar a ${this.player.nombre} ${this.player.apellidos}? Esta acción es permanente.`)) {
       
-      // ✅ CORRECCIÓN: Doble aserción para forzar el tipo string
-      this.playerService.deletePlayer(this.player.id as unknown as string)
+      // 🚨 Doble aserción para convertir el 'number' a 'string'
+      const firestoreId = this.player.id as unknown as string;
+
+      this.playerService.deletePlayer(firestoreId)
         .then(() => {
           this.dialogRef.close({ deleted: true }); 
         })
-        .catch((error: any) => {
-          console.error("Error al eliminar el jugador:", error);
-          alert("❌ Error: No se pudo eliminar al jugador.");
-          this.dialogRef.close();
-        });
+        .catch(this.handleError);
     }
   }
 
