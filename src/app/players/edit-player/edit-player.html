@@ -1,0 +1,65 @@
+<div class="edit-popup-backdrop">
+  <div class="edit-popup">
+    <!-- header -->
+    <div class="edit-header">
+      <h3>Editar jugador</h3>
+      <button class="close-circle" (click)="cancelar()">✕</button>
+    </div>
+
+    <form [formGroup]="playerForm" (ngSubmit)="onSubmit()" class="edit-form">
+
+      <div class="row">
+        <label>Nombre</label>
+        <input formControlName="nombre" type="text" placeholder="{{ player?.nombre || 'Nombre' }}" />
+      </div>
+
+      <div class="row">
+        <label>Apellidos</label>
+        <input formControlName="apellidos" type="text" placeholder="{{ player?.apellidos || 'Apellidos' }}" />
+      </div>
+
+      <div class="row">
+        <label>Posición</label>
+        <select formControlName="posicion">
+          <option value="">-- Mantener --</option>
+          <option>Base</option>
+          <option>Escolta</option>
+          <option>Alero</option>
+          <option>Ala-Pívot</option>
+          <option>Pívot</option>
+        </select>
+      </div>
+
+      <div class="row two-cols">
+        <div>
+          <label>Edad</label>
+          <input formControlName="edad" type="number" placeholder="{{ player?.edad || 'Edad' }}" />
+        </div>
+        <div>
+          <label>Altura (cm)</label>
+          <input formControlName="altura" type="number" placeholder="{{ player?.altura || 'Altura' }}" />
+        </div>
+      </div>
+
+      <div class="row">
+        <label>URL multimedia (posición 0)</label>
+        <input formControlName="multimedia0" type="text" placeholder="{{ player?.multimedia?.[0] || 'URL multimedia' }}" />
+      </div>
+
+      <div class="row">
+        <label>ID de YouTube</label>
+        <input formControlName="youtubeId" type="text" placeholder="{{ player?.youtubeId || 'YouTube ID' }}" />
+      </div>
+
+      <div class="row">
+        <label>Información</label>
+        <textarea formControlName="info" rows="4" placeholder="{{ player?.info || 'Info adicional' }}"></textarea>
+      </div>
+
+      <div class="row actions">
+        <button type="button" class="btn-secondary" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn-primary">Guardar cambios</button>
+      </div>
+    </form>
+  </div>
+</div>

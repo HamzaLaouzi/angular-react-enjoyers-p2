@@ -1,0 +1,55 @@
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+  <div class="bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-2xl shadow-2xl w-full max-w-md p-6 relative animate-scaleIn">
+
+    <!-- Botón cerrar -->
+    <button 
+      class="absolute top-3 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold transition"
+      (click)="cerrar.emit()">
+      ✕
+    </button>
+
+    <!-- Título -->
+    <h2 class="text-2xl font-semibold mb-6 text-center text-gray-800">Añadir nuevo jugador</h2>
+
+    <form [formGroup]="playerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+      <input formControlName="nombre" type="text" placeholder="Nombre"
+        class="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-lg px-4 py-2 transition" />
+
+      <input formControlName="apellidos" type="text" placeholder="Apellidos"
+        class="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-lg px-4 py-2 transition" />
+
+      <select formControlName="posicion"
+        class="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-lg px-4 py-2 transition text-gray-700">
+        <option value="" disabled selected>Selecciona posición</option>
+        <option>Base</option>
+        <option>Escolta</option>
+        <option>Alero</option>
+        <option>Ala-Pívot</option>
+        <option>Pívot</option>
+      </select>
+
+      <div class="flex gap-3">
+        <input formControlName="edad" type="number" placeholder="Edad"
+          class="w-1/2 border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-lg px-4 py-2 transition" />
+        <input formControlName="altura" type="number" placeholder="Altura (cm)"
+          class="w-1/2 border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-lg px-4 py-2 transition" />
+      </div>
+
+      <input formControlName="multimedia0" type="text" placeholder="URL multimedia (opcional)"
+        class="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-lg px-4 py-2 transition" />
+
+      <input formControlName="youtubeId" type="text" placeholder="ID de YouTube"
+        class="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-lg px-4 py-2 transition" />
+
+      <textarea formControlName="info" rows="4" placeholder="Info"
+        class="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-lg px-4 py-2 transition resize-none"></textarea>
+
+      <button type="submit"
+        class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-2 rounded-lg mt-2 shadow-md transition">
+        Guardar jugador
+      </button>
+
+    </form>
+  </div>
+</div>

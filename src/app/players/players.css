@@ -120,3 +120,73 @@
     align-items: stretch;
   }
 }
+
+/* Boton Añadir Jugador */
+
+.add-player-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0;
+}
+
+.btn-add-player {
+  background-color: #424242;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-add-player:hover {
+  background-color: #a36a00;
+}
+
+/* Formulario */
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  animation: popupFade 0.25s ease;
+}
+
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+@keyframes popupFade {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

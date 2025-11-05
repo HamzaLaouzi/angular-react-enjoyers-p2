@@ -21,6 +21,23 @@
         <option value="Pívot">Pivot</option>
       </select>
     </div>
+
+      <!-- 🔹 Botón para abrir popup del formulario -->
+    <div class="add-player-btn-container">
+      <button
+        class="btn-add-player"
+        (click)="abrirFormulario()">
+        ➕ Añadir Jugador
+      </button>
+    </div>
+  </div>
+
+   <!-- Popup del formulario -->
+  <div *ngIf="mostrarFormulario" class="popup-overlay">
+    <div class="popup-content">
+      <button class="cerrar" (click)="cerrarFormulario()">✖</button>
+      <app-add-player (cerrar)="cerrarFormulario()"></app-add-player>
+    </div>
   </div>
 
   <!-- Encabezado -->

@@ -1,0 +1,117 @@
+/* backdrop */
+.edit-popup-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10,10,10,0.5);
+  z-index: 2000;
+}
+
+/* modal box */
+.edit-popup {
+  width: 100%;
+  max-width: 540px;
+  background: linear-gradient(180deg,#fff,#f7f8fb);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  border: 1px solid rgba(0,0,0,0.06);
+  animation: popupIn 0.22s ease;
+}
+
+/* header */
+.edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.edit-header h3 {
+  margin: 0;
+  color: #d9552b; /* color primario similar a tu ficha */
+  font-size: 1.25rem;
+}
+
+.close-circle {
+  border: none;
+  background: #fff;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* form rows */
+.edit-form .row {
+  margin-bottom: 12px;
+}
+
+.edit-form label {
+  display: block;
+  font-size: 0.85rem;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.edit-form input,
+.edit-form select,
+.edit-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 2px solid #dd5a03;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.edit-form input:focus,
+.edit-form select:focus,
+.edit-form textarea:focus {
+  outline: none;
+  border-color: #c26e00;
+  box-shadow: 0 0 0 2px #ff9b28;
+}
+
+/* two columns layout */
+.two-cols {
+  display: flex;
+  gap: 12px;
+}
+.two-cols > div { flex: 1; }
+
+/* actions */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg,#007bff,#0056d6);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #d0d6dd;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* anim */
+@keyframes popupIn {
+  from { transform: translateY(-8px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}

@@ -4,7 +4,7 @@ import { Player } from '../models/player.model';
 // import { PLAYERS } from '../data/players';  /* Comentado para desactivar el enlace a nuestro array local*/
 import { PlayerService } from '../players/players.services'; /*Nuevo importar de FireBase*/
 import { DetailComponent } from '../detail/detail';
-
+import { AddPlayerComponent } from './add-player/add-player';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PlayerFilterPipe } from '../player-filter-pipe';
@@ -13,11 +13,12 @@ import { PlayerFilterPipe } from '../player-filter-pipe';
   selector: 'app-players',
   templateUrl: './players.html',
   styleUrls: ['./players.css'],
-  imports: [CommonModule, FormsModule, PlayerFilterPipe]
+  imports: [CommonModule, FormsModule, PlayerFilterPipe, AddPlayerComponent]
 })
 export class PlayersComponent {
   players: Player[] = [];
-  selectedPlayerId: number | null = null;
+  selectedPlayerId: string | null = null;
+  mostrarFormulario = false;
 
   constructor(private dialog: MatDialog, private playerService: PlayerService) {}
 
@@ -37,6 +38,14 @@ export class PlayersComponent {
     dialogRef.afterClosed().subscribe(() => {
       this.selectedPlayerId = null;
     });
+  }
+
+  abrirFormulario() {
+    this.mostrarFormulario = true;
+  }
+
+  cerrarFormulario() {
+    this.mostrarFormulario = false;
   }
 
   // Variables para filtros

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { CollectionReference, collection, collectionData, Firestore } from '@angular/fire/firestore';
+import { CollectionReference, collection, collectionData, Firestore, addDoc, doc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Player } from '../models/player.model';
 
@@ -21,4 +21,14 @@ export class PlayerService {
     // Añadimos { idField: 'id' } para incluir el ID.
     return collectionData(this.playersCollection, { idField: 'id' }) as Observable<Player[]>;
   }
+
+  addPlayer(player: Player) {
+    return addDoc(this.playersCollection, player)
+  }
+
+  updatePlayer(id: string, data: Partial<Player>) {
+    const playerRef = doc(this.firestore, `players/${id}`);
+    return updateDoc(playerRef, data);
+  }
+  
 }
