@@ -1,0 +1,109 @@
+<div class="card shadow-lg p-3" 
+     style="background-color: #FDFDFD; color: var(--color-fondo-oscuro); border-radius: 1rem; max-width: 700px; width: 100%;">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-0" style="color: var(--color-primario);">
+      {{ isEditing ? 'Editar Jugador' : player.nombre + ' ' + player.apellidos }}
+    </h2>
+    <button type="button" class="btn-close" aria-label="Cerrar" (click)="dialogRef.close()"></button>
+  </div>
+
+  <div class="card-content-scrollable">
+    
+    <div *ngIf="!isEditing">
+        <div class="row">
+          <div class="col-md-6 text-center mb-3 mb-md-0">
+            <img
+              [src]="player.multimedia"
+              [alt]="player.nombre"
+              class="img-fluid rounded shadow-sm"
+              style="max-width: 220px; object-fit: cover; border: 2px solid var(--color-primario);"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <p class="mb-2"><strong>Posición:</strong> {{ player.posicion }}</p>
+            <p class="mb-2"><strong>Edad:</strong> {{ player.edad }} años</p>
+            <p class="mb-2"><strong>Altura:</strong> {{ player.altura }}</p>
+            <p class="mb-2"><strong>Información:</strong> {{ player.info }}</p>
+          </div>
+        </div>
+    </div>
+    
+    <form [formGroup]="editForm" *ngIf="isEditing">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text" formControlName="nombre" class="form-control" [class.is-invalid]="editForm.get('nombre')?.invalid && editForm.get('nombre')?.touched" required>
+                <div class="invalid-feedback" *ngIf="editForm.get('nombre')?.hasError('required')">El nombre es obligatorio.</div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Apellidos</label>
+                <input type="text" formControlName="apellidos" class="form-control" [class.is-invalid]="editForm.get('apellidos')?.invalid && editForm.get('apellidos')?.touched" required>
+                <div class="invalid-feedback" *ngIf="editForm.get('apellidos')?.hasError('required')">Los apellidos son obligatorios.</div>
+            </div>
+            
+            <div class="col-md-4 mb-3">
+                <label class="form-label">Posición</label>
+                <input type="text" formControlName="posicion" class="form-control" required>
+            </div>
+            
+            <div class="col-md-4 mb-3">
+                <label class="form-label">Edad</label>
+                <input type="number" formControlName="edad" class="form-control" [class.is-invalid]="editForm.get('edad')?.invalid && editForm.get('edad')?.touched" required>
+                <div class="invalid-feedback" *ngIf="editForm.get('edad')?.hasError('required')">La edad es obligatoria.</div>
+            </div>
+            
+            <div class="col-md-4 mb-3">
+                <label class="form-label">Altura (ej. 2.06m)</label>
+                <input type="text" formControlName="altura" class="form-control" required>
+            </div>
+            
+            <div class="col-md-12 mb-3">
+                <label class="form-label">URL Imagen (multimedia)</label>
+                <input type="url" formControlName="multimedia" class="form-control">
+            </div>
+            
+            <div class="col-md-12 mb-3">
+                <label class="form-label">ID de YouTube</label>
+                <input type="text" formControlName="youtubeId" class="form-control">
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <label class="form-label">Información</label>
+                <textarea formControlName="info" class="form-control" rows="3" required></textarea>
+                <div class="invalid-feedback" *ngIf="editForm.get('info')?.hasError('required')">La información es obligatoria.</div>
+            </div>
+        </div>
+    </form>
+    <div class="row text-center mt-4" *ngIf="player.youtubeId && !isEditing">
+        <app-media [youtubeId]="player.youtubeId"></app-media>
+    </div>
+  </div>
+  
+  <div class="d-flex justify-content-end gap-2 mt-3">
+    
+    <ng-container *ngIf="isEditing">
+        <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+            <i class="fas fa-times"></i> Cancelar
+        </button>
+        <button type="button" class="btn btn-success" [disabled]="editForm.invalid" (click)="saveChanges()">
+            <i class="fas fa-save"></i> Guardar Cambios
+        </button>
+    </ng-container>
+
+    <ng-container *ngIf="!isEditing">
+        <button type="button" class="btn btn-outline-secondary" (click)="dialogRef.close()">
+            Cerrar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="startEdit()">
+            <i class="fas fa-edit"></i> Editar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="deletePlayer()">
+            <i class="fas fa-trash-alt"></i> Eliminar
+        </button>
+    </ng-container>
+  </div>
+
+</div>
