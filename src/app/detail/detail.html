@@ -3,7 +3,10 @@
 
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="fw-bold mb-0" style="color: var(--color-primario);">
-      {{ isEditing ? 'Editar Jugador' : player.nombre + ' ' + player.apellidos }}
+      <span *ngIf="!isEditing">{{ player.nombre + ' ' + player.apellidos }}</span>
+      <span *ngIf="isEditing">
+        {{ player.id ? 'Editar Jugador' : 'Añadir Jugador' }}
+      </span>
     </h2>
     <button type="button" class="btn-close" aria-label="Cerrar" (click)="dialogRef.close()"></button>
   </div>

@@ -67,18 +67,24 @@ export class DetailComponent implements OnInit {
   }
 
   cancelEdit(): void {
-    this.isEditing = false;
-    this.editForm.reset({
-        ...this.player, 
-        multimedia: this.player.multimedia?.join('\n') || ''
-    }); 
+    if (!this.player.id || this.player.id === 0) {
+      // MODO CREACIÓN: Si el jugador no tiene ID, "Cancelar" debe CERRAR el diálogo.
+      this.dialogRef.close();
+    } else {
+      // MODO EDICIÓN: Si el jugador sí tiene ID, "Cancelar" vuelve a la vista de detalles.
+      this.isEditing = false;
+      this.editForm.reset({
+          ...this.player, 
+          multimedia: this.player.multimedia?.join('\n') || ''
+      });
+    }
   }
 
   // Función auxiliar para manejar errores y mostrar el mensaje completo
   private handleError(error: any): void {
       console.error("Error de Firebase:", error);
       // Muestra el error en una alerta para que puedas verlo
-      alert(`❌ Error: Falló la operación en la base de datos. Mensaje detallado: ${error.message || 'Desconocido'}`);
+      alert(`Error: Falló la operación en la base de datos. Mensaje detallado: ${error.message || 'Desconocido'}`);
       this.dialogRef.close();
   }
 
@@ -105,10 +111,8 @@ export class DetailComponent implements OnInit {
         multimedia: formValues.multimedia.split('\n').filter((url: string) => url.trim() !== ''),
     };
     
-    // 🔑 LÓGICA DE CREACIÓN VS. EDICIÓN
     if (this.player.id) {
-        // MODO EDICIÓN: El jugador tiene ID
-        // 🚨 Doble aserción para convertir el 'number' del modelo a 'string' (ID de Firestore)
+        // convertir el 'number' del modelo a 'string' (ID de Firestore)
         const firestoreId = this.player.id as unknown as string;
         
         try {
