@@ -9,18 +9,30 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PlayerFilterPipe } from '../player-filter-pipe';
 
+/* Nuevos imports para los botones de editar y borrar en la tarjeta del jugador */
+import { Firestore, doc, deleteDoc } from '@angular/fire/firestore';
+import { ToastrService } from 'ngx-toastr';
+import { EditPlayerComponent } from '../players/edit-player/edit-player';
+import { MatIconModule } from '@angular/material/icon';
+
+
 @Component({
   selector: 'app-players',
   templateUrl: './players.html',
   styleUrls: ['./players.css'],
-  imports: [CommonModule, FormsModule, PlayerFilterPipe, AddPlayerComponent]
+  imports: [CommonModule, FormsModule, PlayerFilterPipe, AddPlayerComponent, MatIconModule]
 })
 export class PlayersComponent {
   players: Player[] = [];
   selectedPlayerId: string | null = null;
   mostrarFormulario = false;
 
-  constructor(private dialog: MatDialog, private playerService: PlayerService) {}
+  constructor(
+    private dialog: MatDialog, 
+    private playerService: PlayerService,
+    private firestore: Firestore,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.playerService.getPlayers().subscribe(data => {
@@ -47,6 +59,28 @@ export class PlayersComponent {
   cerrarFormulario() {
     this.mostrarFormulario = false;
   }
+
+  abrirEdicion(player: any) {
+    this.dialog.open(EditPlayerComponent, {
+      width: '600px',
+      data: { player }
+    });
+  }
+
+  async borrarJugador(player: any) {
+    const confirmDelete = confirm(`¿Seguro que quieres borrar a "${player.nombre}"?`);
+    if (!confirmDelete) return;
+
+    try {
+      const playerRef = doc(this.firestore, `players/${player.id}`);
+      await deleteDoc(playerRef);
+      this.toastr.success(`Jugador "${player.nombre}" eliminado correctamente`);
+    } catch (error) {
+      console.error('Error al borrar jugador:', error);
+      this.toastr.error('Error al borrar jugador');
+    }
+}
+
 
   // Variables para filtros
   filterName: string = '';

@@ -72,6 +72,14 @@
               <h6 class="card-title mb-0">
                 {{ player.nombre }} {{ player.apellidos }}
               </h6>
+                <div class="player-actions">
+                  <button class="btn-icon edit" (click)="abrirEdicion(player); $event.stopPropagation()">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button class="btn-icon delete" (click)="borrarJugador(player); $event.stopPropagation()">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
             </div>
           </div>
         </div>

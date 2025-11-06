@@ -190,3 +190,36 @@
     opacity: 1;
   }
 }
+
+/* Contenedor de los botones */
+.player-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* Estilos generales de los iconos */
+.btn-icon {
+  background: transparent;
+  border: none;
+  color: #a8eef3;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+/* Hover efecto */
+.btn-icon:hover {
+  transform: scale(1.15);
+}
+
+/* Colores personalizados */
+.btn-icon.edit:hover {
+  color: #ffffff; /* naranja */
+}
+
+.btn-icon.delete:hover {
+  color: #ffffff; /* rojo */
+}

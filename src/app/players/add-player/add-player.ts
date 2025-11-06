@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PlayerService } from '../players.services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-player',
@@ -12,7 +13,11 @@ export class AddPlayerComponent {
   @Output() cerrar = new EventEmitter<void>();
   playerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private playerService: PlayerService) {
+  constructor(
+    private fb: FormBuilder, 
+    private playerService: PlayerService,
+    private toastr: ToastrService // ✅ Inyectamos Toastr) 
+  ) {
     this.playerForm = this.fb.group({
       id: [''],
       nombre: ['', Validators.required],
@@ -42,12 +47,15 @@ export class AddPlayerComponent {
 
       this.playerService.addPlayer(playerData)
         .then(() => {
-          alert('✅ Jugador añadido correctamente');
+          this.toastr.success('Jugador añadido correctamente ✅', 'Éxito');
           this.cerrar.emit(); // Cierra el popup
         })
-        .catch(err => console.error('❌ Error al añadir jugador:', err));
+         .catch(err => {
+          console.error('❌ Error al añadir jugador:', err);
+          this.toastr.error('Error al añadir el jugador', 'Error');
+        });
     } else {
-      alert('Por favor completa los campos obligatorios');
+      this.toastr.warning('Por favor completa los campos obligatorios', 'Formulario incompleto');
     }
   }
 }

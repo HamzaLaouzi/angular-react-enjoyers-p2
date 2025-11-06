@@ -9,6 +9,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^20.3.10",
     "@angular/cdk": "^20.2.11",
     "@angular/common": "^20.3.10",
     "@angular/compiler": "^20.3.10",
@@ -18,7 +19,7 @@
     "@angular/material": "^20.2.11",
     "@angular/platform-browser": "^20.3.10",
     "@angular/router": "^20.3.10",
-    "@angular/youtube-player": "^20.2.8",
+    "@angular/youtube-player": "^20.2.11",
     "ngx-toastr": "^19.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

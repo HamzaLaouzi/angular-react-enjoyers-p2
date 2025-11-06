@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MediaComponent } from '../media/media';
 import { NgIf } from '@angular/common';
 import { EditPlayerComponent } from '../players/edit-player/edit-player';
+import { ToastrService } from 'ngx-toastr';
 
 /* Import para el deletePlayer */
 import { Firestore, doc, deleteDoc } from '@angular/fire/firestore';
@@ -20,7 +21,8 @@ export class DetailComponent {
   constructor(
     public dialogRef: MatDialogRef<DetailComponent>,
     private dialog: MatDialog,
-    private firestore: Firestore,  // Añadimos Firestore
+    private firestore: Firestore, // Añadimos Firestore
+    private toastr: ToastrService,  
     @Inject(MAT_DIALOG_DATA) public player: Player
   ) { }
 
@@ -52,11 +54,17 @@ export class DetailComponent {
       const playerRef = doc(this.firestore, `players/${this.player.id}`);
       await deleteDoc(playerRef);
 
-      alert('Jugador borrado correctamente.');
+      this.toastr.success('Jugador borrado correctamente', 'Éxito', {
+        positionClass: 'toast-bottom-right',
+        timeOut: 2500
+      });
       this.dialogRef.close(true); // Cierra el diálogo y notifica al padre
     } catch (error) {
       console.error('Error al borrar jugador:', error);
-      alert('No se pudo borrar el jugador.');
+      this.toastr.error('No se pudo borrar el jugador', 'Error', {
+        positionClass: 'toast-bottom-right',
+        timeOut: 3000
+      });
     }
   }
 }

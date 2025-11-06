@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PlayerService } from '../players.services';
 import { Player } from '../../models/player.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-player',
@@ -20,6 +21,7 @@ export class EditPlayerComponent implements OnInit {
     private fb: FormBuilder,
     private playerService: PlayerService,
     private dialogRef: MatDialogRef<EditPlayerComponent>,
+    private toastr: ToastrService, 
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     // initialize form with empty values (optional validators)
@@ -77,6 +79,7 @@ export class EditPlayerComponent implements OnInit {
   async onSubmit() {
     if (!this.player || !this.player.id) {
       console.error('Jugador inválido o sin id.');
+      this.toastr.error('Jugador inválido o sin ID', 'Error');
       return;
     }
 
@@ -84,6 +87,7 @@ export class EditPlayerComponent implements OnInit {
 
     // Si no hay cambios, cerramos sin llamar a Firestore
     if (Object.keys(cambios).length === 0) {
+      this.toastr.info('No se realizaron cambios', 'Sin modificaciones');
       this.dialogRef.close(null); // nada cambiado
       return;
     }
@@ -91,10 +95,11 @@ export class EditPlayerComponent implements OnInit {
     try {
       await this.playerService.updatePlayer(this.player.id, cambios);
       // opcional: devolver los cambios o el jugador actualizado
+      this.toastr.success('Jugador actualizado correctamente ✅', 'Actualización exitosa');
       this.dialogRef.close({ updated: true, changes: cambios });
     } catch (err) {
       console.error('Error actualizando jugador:', err);
-      // podrías mostrar alerta/Toast aquí
+      this.toastr.error('Error al actualizar el jugador', 'Error');
     }
   }
 
