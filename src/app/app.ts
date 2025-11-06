@@ -4,7 +4,11 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, YouTubePlayerModule],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    YouTubePlayerModule,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

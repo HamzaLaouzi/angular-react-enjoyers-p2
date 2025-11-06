@@ -24,9 +24,9 @@ export class NewPlayerComponent {
       posicion: ['', Validators.required],
       edad: [null, Validators.required],
       altura: [null, Validators.required],
-      multimedia: [''],
-      youtubeId: [''],
-      info: ['']
+      multimedia: ['', Validators.required],
+      youtubeId: ['', Validators.required],
+      info: ['', Validators.required]
     });
   }
 
