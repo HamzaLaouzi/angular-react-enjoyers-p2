@@ -52,9 +52,6 @@ export class EditPlayerComponent implements OnInit {
         youtubeId: this.player.youtubeId ?? '',
         info: this.player.info ?? ''
       });
-
-      // Si prefieres que los inputs empiecen vacíos y el formulario solo incluya cambios,
-      // comenta la línea anterior y los inputs estarán vacíos para que el usuario solo escriba lo que quiera cambiar.
     }
   }
 

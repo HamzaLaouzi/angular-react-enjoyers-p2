@@ -10,12 +10,12 @@
 
       <div class="row">
         <label>Nombre</label>
-        <input formControlName="nombre" type="text" placeholder="{{ player?.nombre || 'Nombre' }}" />
+        <input formControlName="nombre" type="text" placeholder="{{ player.nombre || 'Nombre' }}" />
       </div>
 
       <div class="row">
         <label>Apellidos</label>
-        <input formControlName="apellidos" type="text" placeholder="{{ player?.apellidos || 'Apellidos' }}" />
+        <input formControlName="apellidos" type="text" placeholder="{{ player.apellidos || 'Apellidos' }}" />
       </div>
 
       <div class="row">
@@ -33,27 +33,27 @@
       <div class="row two-cols">
         <div>
           <label>Edad</label>
-          <input formControlName="edad" type="number" placeholder="{{ player?.edad || 'Edad' }}" />
+          <input formControlName="edad" type="number" placeholder="{{ player.edad || 'Edad' }}" />
         </div>
         <div>
           <label>Altura (cm)</label>
-          <input formControlName="altura" type="number" placeholder="{{ player?.altura || 'Altura' }}" />
+          <input formControlName="altura" type="number" placeholder="{{ player.altura || 'Altura' }}" />
         </div>
       </div>
 
       <div class="row">
         <label>URL multimedia (posición 0)</label>
-        <input formControlName="multimedia0" type="text" placeholder="{{ player?.multimedia?.[0] || 'URL multimedia' }}" />
+        <input formControlName="multimedia0" type="text" [placeholder]="player.multimedia && player.multimedia.length ? player.multimedia[0] : 'URL multimedia'" />
       </div>
 
       <div class="row">
         <label>ID de YouTube</label>
-        <input formControlName="youtubeId" type="text" placeholder="{{ player?.youtubeId || 'YouTube ID' }}" />
+        <input formControlName="youtubeId" type="text" placeholder="{{ player.youtubeId || 'YouTube ID' }}" />
       </div>
 
       <div class="row">
         <label>Información</label>
-        <textarea formControlName="info" rows="4" placeholder="{{ player?.info || 'Info adicional' }}"></textarea>
+        <textarea formControlName="info" rows="4" placeholder="{{ player.info || 'Info adicional' }}"></textarea>
       </div>
 
       <div class="row actions">

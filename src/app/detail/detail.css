@@ -24,7 +24,8 @@
   font-size: 0.8rem;
 }
 
-.add-player-btn {
+.add-player-btn,
+.btn-delete {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -40,19 +41,22 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.add-player-btn:hover {
+.add-player-btn:hover,
+.btn-delete:hover {
   background-color: #b26b00; /* naranja intenso al hover */
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
 }
 
-.add-player-btn i {
+.add-player-btn i,
+.btn-delete i {
   color: #a175ff; /* color violeta del icono */
   font-size: 18px;
   transition: color 0.25s ease;
 }
 
-.add-player-btn:hover i {
+.add-player-btn:hover i,
+.btn-delete i:hover {
   color: #fff;
 }
   
