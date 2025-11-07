@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Player } from '../../models/player.model';
+import { PlayerWithId } from '../../models/player.model';
 import { DetailComponent } from '../detail/detail';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +10,6 @@ import { Firestore } from '@angular/fire/firestore';
 import { NewPlayerComponent } from '../new-player/new-player';
 import { ToastrService } from 'ngx-toastr';
 
-type PlayerWithId = Player & { id: string };
 
 @Component({
   selector: 'app-players',
@@ -50,7 +49,7 @@ export class PlayersComponent {
       data: player
     });
 
-    // 🔹 Aquí añadimos lógica para refrescar datos al cerrar el diálogo
+    // Aquí añadimos lógica para refrescar datos al cerrar el diálogo
     dialogRef.afterClosed().subscribe((updatedPlayer?: PlayerWithId) => {
       this.selectedPlayerId = null;
 

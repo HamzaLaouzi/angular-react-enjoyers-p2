@@ -7,7 +7,7 @@ import { MediaComponent } from '../media/media';
 import { NgIf } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PlayerService } from '../../services/player-service';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detail',
@@ -92,7 +92,7 @@ export class DetailComponent {
       // Vuelve al modo vista
       this.editMode = false;
 
-      // 👇 Si el componente Media usa youtubeId, hay que forzar su recarga opcionalmente:
+      // Si el componente Media usa youtubeId, hay que forzar su recarga opcionalmente:
       // Esto se hace reasignando el id para que Angular detecte el cambio
       this.player.youtubeId = updatePayload.youtubeId ?? this.player.youtubeId;
 
