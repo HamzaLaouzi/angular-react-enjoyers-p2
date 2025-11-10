@@ -21,8 +21,8 @@ export class NewPlayerComponent {
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       posicion: ['', Validators.required],
-      edad: [null, Validators.required],
-      altura: [null, Validators.required],
+      edad: [null, [Validators.required, Validators.min(1)]],
+      altura: [null, [Validators.required, Validators.min(1)]],
       multimedia: ['', Validators.required],
       youtubeId: ['', Validators.required],
       info: ['', Validators.required]
