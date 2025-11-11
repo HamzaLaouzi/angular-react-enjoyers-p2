@@ -1,0 +1,141 @@
+/* ==============================================
+   Estilos base del contenedor principal (card)
+   ============================================== */
+.card {
+  background-color: #FDFDFD;
+  color: var(--color-fondo-oscuro);
+  border-radius: 1rem;
+  max-width: 700px;
+  width: 100%;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ==============================================
+   Header del diálogo
+   ============================================== */
+.card h2 {
+  color: var(--color-primario);
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.card .btn-close {
+  font-size: 1.5rem;
+  color: var(--color-fondo-oscuro);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.card .btn-close:hover {
+  color: var(--color-primario);
+}
+
+/* ==============================================
+   Formulario (modo edición)
+   ============================================== */
+.card form .form-label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  display: block;
+  color: var(--color-fondo-oscuro);
+}
+
+.card form input.form-control,
+.card form textarea.form-control,
+.card form select.form-control {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  color: #000;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.card form input.form-control:focus,
+.card form textarea.form-control:focus,
+.card form select.form-control:focus {
+  border-color: var(--color-primario);
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(228, 77, 38, 0.25);
+}
+
+/* ==============================================
+   Botones
+   ============================================== */
+.card .btn-primario {
+  background-color: var(--color-primario);
+  color: var(--color-texto);
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.card .btn-primario:hover {
+  background-color: var(--color-hover);
+}
+
+.card .btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.card .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-editar {
+  background-color: var(--color-fondo-oscuro);
+  color: var(--color-texto);
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-editar:hover {
+  background-color: var(--color-secundario);
+  color: var(--color-texto);
+  cursor: pointer;
+}
+
+/* ==============================================
+   Contenedor del scroll (modo vista)
+   ============================================== */
+.card-content-scrollable {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.card-content-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.card-content-scrollable::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.card-content-scrollable::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* ==============================================
+   Contenedor de botones de acción
+   ============================================== */
+.card .d-flex.justify-content-end.gap-2 {
+  margin-top: 1rem;
+}

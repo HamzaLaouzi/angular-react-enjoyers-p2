@@ -1,0 +1,74 @@
+<!-- Card principal del diálogo -->
+<div class="card shadow-lg p-3"
+    style="background-color: #FDFDFD; color: var(--color-fondo-oscuro); border-radius: 1rem; max-width: 700px; width: 100%;">
+
+    <!-- Header del diálogo -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold mb-0" style="color: var(--color-primario);">
+            Nuevo Jugador
+        </h2>
+
+        <!-- Botón cerrar -->
+        <button type="button" class="btn-close" aria-label="Cerrar" (click)="dialogRef.close()">×</button>
+    </div>
+
+    <!-- Formulario -->
+    <form [formGroup]="playerForm" (ngSubmit)="savePlayer()">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" formControlName="nombre" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Apellidos</label>
+                <input type="text" class="form-control" formControlName="apellidos" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Edad</label>
+                <input type="number" class="form-control" formControlName="edad" min="18" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Altura (cm)</label>
+                <input type="number" class="form-control" formControlName="altura" min="150" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Posición</label>
+                <select class="form-control" formControlName="posicion" required>
+                    <option value="" disabled selected>Selecciona una posición</option>
+                    <option value="Base">Base</option>
+                    <option value="Escolta">Escolta</option>
+                    <option value="Alero">Alero</option>
+                    <option value="Ala-Pívot">Ala-Pívot</option>
+                    <option value="Pívot">Pívot</option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">Multimedia (indica URL de la imagen)</label>
+                <input type="text" class="form-control" formControlName="multimedia" required>
+                <!-- <input type="file" class="form-control" formControlName="file" required> -->
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">ID de YouTube</label>
+                <input type="text" class="form-control" formControlName="youtubeId" required>
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">Información</label>
+                <textarea class="form-control" formControlName="info" rows="4" required></textarea>
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="d-flex justify-content-end gap-2 mt-4">
+            <button type="button" class="btn btn-secondary" (click)="dialogRef.close()">Cancelar</button>
+            <button type="submit" class="btn btn-primario" [disabled]="playerForm.invalid">Guardar</button>
+        </div>
+    </form>
+
+</div>

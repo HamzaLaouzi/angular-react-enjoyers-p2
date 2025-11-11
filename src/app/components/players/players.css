@@ -1,0 +1,151 @@
+.player-img {
+  object-fit: cover;
+  object-position: center top; /* centra y muestra más la cara */
+  transition: transform 0.2s ease;
+}
+
+.player-card:hover .player-img {
+  transform: scale(1.05);
+}
+
+.player-card {
+  background-color: #E44D26;
+  color: #FFFFFF;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.player-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.player-card.border-primary {
+  border-width: 2px !important;
+}
+
+.player-component {
+  background-color: #0A7EA4;
+}
+
+.player-card.border-primario {
+  border-color: var(--color-primario);
+  border-width: 5px !important; /* Aumenta el grosor del borde */
+  border-style: solid;           /* Asegura que sea sólido */
+}
+
+.fondo-transparente {
+  background: #00000000;
+}
+
+
+/*Añadidos de CSS para los pipes*/
+.filter-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filter-container input,
+.filter-container select {
+  background: rgba(238, 238, 238, 0.288);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+}
+
+.filter-container input:hover,
+.filter-container select:hover,
+.filter-container input:focus,
+.filter-container select:focus {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #ff6f00;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 111, 0, 0.5);
+  cursor: pointer;
+}
+
+.filter-container select:focus,
+.filter-container select:hover{
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='16' viewBox='0 0 20 20' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M5.516 7.548l4.484 4.484 4.484-4.484L16 9.064l-6 6-6-6z'/></svg>");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 14px;
+}
+
+.filter-container input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.filter-container select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  padding-right: 30px;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='16' viewBox='0 0 20 20' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M5.516 7.548l4.484 4.484 4.484-4.484L16 9.064l-6 6-6-6z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.filter-container select option {
+  background-color: rgba(238, 238, 238, 0.288); 
+  color: #000000; 
+}
+
+.filter-container input[type="text"] {
+  width: 180px;
+}
+
+.filter-container input[type="number"] {
+  width: 150px;
+}
+
+.filter-container select {
+  width: 195px;
+  height: 36px;
+}
+
+@media (max-width: 600px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.btn-primario {
+  background-color: var(--color-primario);
+  color: var(--color-texto);
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: all 0.2s ease;
+}
+
+.btn-primario:hover {
+  background-color: var(--color-hover);
+  color: var(--color-fondo-oscuro);
+}
+
+.btn-eliminar {
+  background-color: #0F2537;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.btn-eliminar:hover {
+  background-color: #0A7EA4;
+  cursor: pointer;
+}

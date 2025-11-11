@@ -1,0 +1,57 @@
+<div class="card shadow-sm fondo-transparente">
+  <div class="container">
+    <!-- Filtros de búsqueda -->
+    <div *ngIf="showList" class="filter-container">
+      <input type="text" placeholder="Buscar por nombre" [(ngModel)]="filterName" />
+      <input type="number" placeholder="Altura mínima" [(ngModel)]="filterHeight" />
+      <select [(ngModel)]="filterPosition" class="form-control">
+        <option value="">Todas las posiciones</option>
+        <option value="Base">Base</option>
+        <option value="Escolta">Escolta</option>
+        <option value="Alero">Alero</option>
+        <option value="Ala-Pívot">Ala-Pívot</option>
+        <option value="Pívot">Pívot</option>
+      </select>
+
+      <!-- Botón Añadir jugador -->
+      <button class="btn btn-primario" (click)="addPlayer()">
+        Añadir jugador
+      </button>
+    </div>
+  </div>
+
+  <!-- Encabezado -->
+  <div class="card-header player-component text-white fondo-transparente">
+    <h3 class="mb-0">Listado de Jugadores</h3>
+  </div>
+
+  <!-- Contenido -->
+  <div class="card-body">
+    <div class="row g-3">
+
+      <!-- ✅ Aquí se aplica el pipe -->
+      @for (player of players | playerFilter: filterName : filterHeight : filterPosition; track player.id) {
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card h-100 text-center shadow-sm player-card position-relative" (click)="openDialog(player)"
+          [class.border-primario]="player.id === selectedPlayerId" style="cursor: pointer;">
+
+          <!-- Imagen del jugador -->
+          <div class="ratio ratio-1x1 overflow-hidden">
+            <img [src]="player.multimedia[0]" class="card-img-top img-fluid player-img" alt="{{ player.nombre }}" />
+          </div>
+
+          <!-- Nombre del jugador + Botón eliminar -->
+          <div class="card-body p-2 d-flex justify-content-between align-items-center">
+            <h6 class="card-title mb-0">
+              {{ player.nombre }} {{ player.apellidos }}
+            </h6>
+            <button class="btn btn-eliminar btn-sm" (click)="deletePlayer(player, $event)">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
